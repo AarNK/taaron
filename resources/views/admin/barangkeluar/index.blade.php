@@ -36,9 +36,7 @@
                 <th>Kategori</th>
                 <th>Nama Barang</th>
                 <th>Satuan</th>
-                <th>Stok Awal</th>
-                <th>Kurang</th>
-                <th>Stok</th>
+                <th>Barang Keluar</th>
                 <th>More</th>
               </tr>
               </thead>
@@ -49,9 +47,7 @@
                   <td>{{ $barangkeluar->barang->kategori->name ?? "-"}}</td>
                   <td>{{ $barangkeluar->barang->name ?? "-"}}</td>
                   <td>{{ $barangkeluar->barang->satuan->name ?? "-"}}</td>
-                  <td>{{ $barangkeluar->stokawal ?? "-"}}</td>
                   <td>{{ $barangkeluar->stokkurang ?? "-"}}</td>
-                  <td>{{ $barangkeluar->stokakhir ?? "-"}}</td>
                   <td>
                       @include('admin.barangkeluar.edit')
                       @include('admin.barangkeluar.delete')

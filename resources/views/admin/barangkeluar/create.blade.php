@@ -25,10 +25,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="stokawal">Stok Awal</label>
-                        <input type="number" name="stokawal" id="stokawal" class="form-control" placeholder="Masukkan stok awal" required>
-                    </div>
-                    <div class="form-group">
                         <label for="stokkurang">Kurang</label>
                         <input type="number" name="stokkurang" id="stokkurang" class="form-control" placeholder="Masukkan jumlah stok keluar" required>
                     </div>

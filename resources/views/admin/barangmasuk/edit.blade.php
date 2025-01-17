@@ -25,10 +25,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="stokawal">Stok Awal</label>
-                        <input type="number" name="stokawal" id="stokawal" value="{{ $barangmasuk->stokawal }}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
                         <label for="stoktambah">Stok Masuk</label>
                         <input type="number" name="stoktambah" id="stoktambah" value="{{ $barangmasuk->stoktambah }}" class="form-control" required>
                     </div>

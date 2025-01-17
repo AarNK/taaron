@@ -10,7 +10,7 @@ class BarangKeluar extends Model
     /** @use HasFactory<\Database\Factories\BarangKeluarFactory> */
     use HasFactory;
     protected $table = 'barang_keluars';
-    protected $fillable = ['barang_id','stokawal','stokkurang','stokakhir'];
+    protected $fillable = ['barang_id','stokkurang'];
 
     public function barang()
     {

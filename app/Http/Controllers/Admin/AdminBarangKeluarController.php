@@ -26,15 +26,12 @@ class AdminBarangKeluarController extends Controller
     {
         $request->validate([
             'barang_id' => 'required|max:100',
-            'stokawal' => 'required|integer|min:0',
             'stokkurang' => 'required|integer|min:0',
         ]);
 
         BarangKeluar::create([
             'barang_id' => $request->barang_id,
-            'stokawal' => $request->stokawal,
             'stokkurang' => $request->stokkurang,
-            'stokakhir' => $request->stokawal - $request->stokkurang,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
@@ -47,7 +44,6 @@ class AdminBarangKeluarController extends Controller
     {
         $request->validate([
             'barang_id' => 'required|max:100',
-            'stokawal' => 'required|integer|min:0',
             'stokkurang' => 'required|integer|min:0',
         ]);
 
@@ -55,9 +51,7 @@ class AdminBarangKeluarController extends Controller
 
         $barangKeluar->update([
             'barang_id' => $request->barang_id,
-            'stokawal' => $request->stokawal,
             'stokkurang' => $request->stokkurang,
-            'stokakhir' => $request->stokawal - $request->stokkurang,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');
