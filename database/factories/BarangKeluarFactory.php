@@ -20,6 +20,7 @@ class BarangKeluarFactory extends Factory
         return [
             'barang_id' => Barang::factory(),
             'stokkurang' => fake()->numberBetween(0, 50), // Angka stok tambah acak
+            'created_at' => fake()->dateTimeBetween('-30 days', 'now'),
         ];
     }
 }

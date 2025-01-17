@@ -16,6 +16,7 @@
               <thead>
               <tr>
                 <th>No</th>
+                <th>Tanggal</th>
                 <th>Kategori</th>
                 <th>Nama Barang</th>
                 <th>Satuan</th>
@@ -29,6 +30,7 @@
                 @foreach ($laporans as $laporan)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
+                  <td>{{ $laporan->created_at ?? "-"}}</td>
                   <td>{{ $laporan->barang->kategori->name ?? "-"}}</td>
                   <td>{{ $laporan->barang->name ?? "-"}}</td>
                   <td>{{ $laporan->barang->satuan->name ?? "-"}}</td>

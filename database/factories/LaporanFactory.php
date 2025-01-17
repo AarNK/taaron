@@ -17,12 +17,15 @@ class LaporanFactory extends Factory
      */
     public function definition(): array
     {
+        $stoktambah = fake()->numberBetween(20, 30);
+        $stokkurang = fake()->numberBetween(1, 10);
         return [
             'barang_id' => Barang::factory(),
-            'stokawal' => fake()->numberBetween(0, 100), // Angka stok awal acak
-            'stoktambah' => fake()->numberBetween(0, 50), // Angka stok tambah acak
-            'stokkurang' => fake()->numberBetween(0, 50), // Angka stok tambah acak
-            'stokakhir' => fake()->numberBetween(0, 150), // Angka stok akhir acak (logis jika stokawal + stoktambah)
+            'stokawal' => $stoktambah, // Angka stok awal acak
+            'stoktambah' => $stoktambah, // Angka stok tambah acak
+            'stokkurang' => $stokkurang, // Angka stok tambah acak
+            'stokakhir' => $stoktambah - $stokkurang, // Angka stok akhir acak (logis jika stokawal + stoktambah)
+            'created_at' => fake()->dateTimeBetween('-30 days', 'now'),
         ];
     }
 }

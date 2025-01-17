@@ -15,7 +15,7 @@ class AdminBarangKeluarController extends Controller
      */
     public function index()
     {
-        $barang_keluars = BarangKeluar::all();
+        $barang_keluars = BarangKeluar::orderBy('created_at', 'desc')->get();
         $barangs = Barang::all();
         return view('admin.barangkeluar.index', compact('barang_keluars', 'barangs'));
     }

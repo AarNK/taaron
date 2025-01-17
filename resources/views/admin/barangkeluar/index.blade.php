@@ -33,6 +33,7 @@
               <thead>
               <tr>
                 <th>No</th>
+                <th>Tanggal</th>
                 <th>Kategori</th>
                 <th>Nama Barang</th>
                 <th>Satuan</th>
@@ -44,6 +45,7 @@
                 @foreach ($barang_keluars as $barangkeluar)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
+                  <td>{{ $barangkeluar->created_at ?? "-" }}</td>
                   <td>{{ $barangkeluar->barang->kategori->name ?? "-"}}</td>
                   <td>{{ $barangkeluar->barang->name ?? "-"}}</td>
                   <td>{{ $barangkeluar->barang->satuan->name ?? "-"}}</td>

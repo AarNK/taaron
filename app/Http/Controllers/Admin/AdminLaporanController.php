@@ -13,7 +13,7 @@ class AdminLaporanController extends Controller
      */
     public function index()
     {
-        $laporans = Laporan::all();
+        $laporans = Laporan::orderBy('created_at', 'desc')->get();
         return view('admin.laporan.index', compact('laporans'));
     }
 
