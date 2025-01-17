@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori');
-            $table->string('name');
-            $table->string('satuan');
+            $table->foreignId('barang_id');
             $table->integer('stokawal');
             $table->integer('stoktambah');
             $table->integer('stokkurang');

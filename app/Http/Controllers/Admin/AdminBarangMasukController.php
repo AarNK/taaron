@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\BarangMasuk;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 
 class AdminBarangMasukController extends Controller
@@ -34,6 +35,14 @@ class AdminBarangMasukController extends Controller
             'stoktambah' => $request->stoktambah,
         ]);
 
+        Laporan::create([
+            'barang_id' => $request->barang_id,
+            'stokawal' => $request->stoktambah,
+            'stoktambah' => $request->stoktambah,
+            'stokkurang' => 0,
+            'stokakhir' => $request->stoktambah
+        ]);
+
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -52,6 +61,12 @@ class AdminBarangMasukController extends Controller
         $barangMasuk->update([
             'barang_id' => $request->barang_id,
             'stoktambah' => $request->stoktambah,
+        ]);
+
+        $laporan = Laporan::where('barang_id', $request->barang_id)->firstOrFail();
+        $laporan->update([
+            'stoktambah' => $request->stoktambah,
+            'stokakhir' => $request->stoktambah,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');

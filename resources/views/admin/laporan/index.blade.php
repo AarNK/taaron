@@ -29,9 +29,9 @@
                 @foreach ($laporans as $laporan)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $laporan->kategori ?? "-"}}</td>
-                  <td>{{ $laporan->name ?? "-"}}</td>
-                  <td>{{ $laporan->satuan ?? "-"}}</td>
+                  <td>{{ $laporan->barang->kategori->name ?? "-"}}</td>
+                  <td>{{ $laporan->barang->name ?? "-"}}</td>
+                  <td>{{ $laporan->barang->satuan->name ?? "-"}}</td>
                   <td>{{ $laporan->stokawal ?? "-"}}</td>
                   <td>{{ $laporan->stoktambah ?? "-"}}</td>
                   <td>{{ $laporan->stokkurang ?? "-"}}</td>

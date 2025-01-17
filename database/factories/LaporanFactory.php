@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Barang;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,7 @@ class LaporanFactory extends Factory
     public function definition(): array
     {
         return [
-            'kategori' => fake()->word(), // Menghasilkan kata acak
-            'name' => fake()->words(2, true), // Menghasilkan nama barang acak (2 kata)
-            'satuan' => fake()->randomElement(['pcs', 'kg', 'liter']), // Pilihan satuan umum
+            'barang_id' => Barang::factory(),
             'stokawal' => fake()->numberBetween(0, 100), // Angka stok awal acak
             'stoktambah' => fake()->numberBetween(0, 50), // Angka stok tambah acak
             'stokkurang' => fake()->numberBetween(0, 50), // Angka stok tambah acak

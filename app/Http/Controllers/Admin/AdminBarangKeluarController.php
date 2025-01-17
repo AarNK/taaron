@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\BarangKeluar;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 
 class AdminBarangKeluarController extends Controller
@@ -34,6 +35,14 @@ class AdminBarangKeluarController extends Controller
             'stokkurang' => $request->stokkurang,
         ]);
 
+        $laporan = Laporan::where('barang_id', $request->barang_id)->firstOrFail();
+        $stokAkhirBaru = $laporan->stokakhir - $request->stokkurang;
+        $laporan->update([
+            'stokkurang' => $request->stokkurang,
+            'stokakhir' => $stokAkhirBaru
+        ]);
+
+
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -52,6 +61,13 @@ class AdminBarangKeluarController extends Controller
         $barangKeluar->update([
             'barang_id' => $request->barang_id,
             'stokkurang' => $request->stokkurang,
+        ]);
+
+        $laporan = Laporan::where('barang_id', $request->barang_id)->firstOrFail();
+        $stokAkhirBaru = $laporan->stokakhir - $request->stokkurang;
+        $laporan->update([
+            'stokkurang' => $request->stokkurang,
+            'stokakhir' => $stokAkhirBaru
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');
