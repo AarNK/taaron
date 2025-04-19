@@ -30,18 +30,17 @@ class AdminBarangKeluarController extends Controller
             'stokkurang' => 'required|integer|min:0',
         ]);
 
-        BarangKeluar::create([
+        $barangKeluar = BarangKeluar::create([
             'barang_id' => $request->barang_id,
             'stokkurang' => $request->stokkurang,
         ]);
 
-        $laporan = Laporan::where('barang_id', $request->barang_id)->firstOrFail();
+        $laporan = Laporan::where('barang_id', $request->barang_id)->orderBy('created_at', 'desc')->firstOrFail();
         $stokAkhirBaru = $laporan->stokakhir - $request->stokkurang;
         $laporan->update([
-            'stokkurang' => $request->stokkurang,
+            'stokkurang' => $laporan->stokkurang + $request->stokkurang,
             'stokakhir' => $stokAkhirBaru
         ]);
-
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
@@ -58,15 +57,16 @@ class AdminBarangKeluarController extends Controller
 
         $barangKeluar = BarangKeluar::findOrFail($id);
 
+        $laporan = Laporan::where('barang_id', $request->barang_id)->orderBy('created_at', 'desc')->firstOrFail();
+        $stokAkhirBaru = $laporan->stokakhir + $barangKeluar->stokkurang - $request->stokkurang;
+
         $barangKeluar->update([
             'barang_id' => $request->barang_id,
             'stokkurang' => $request->stokkurang,
         ]);
 
-        $laporan = Laporan::where('barang_id', $request->barang_id)->firstOrFail();
-        $stokAkhirBaru = $laporan->stokakhir - $request->stokkurang;
         $laporan->update([
-            'stokkurang' => $request->stokkurang,
+            'stokkurang' => $laporan->stokkurang - $barangKeluar->stokkurang + $request->stokkurang,
             'stokakhir' => $stokAkhirBaru
         ]);
 

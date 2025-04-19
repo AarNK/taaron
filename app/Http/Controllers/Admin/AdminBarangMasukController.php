@@ -30,18 +30,27 @@ class AdminBarangMasukController extends Controller
             'stoktambah' => 'required|integer|min:0',
         ]);
 
-        BarangMasuk::create([
+        $barangMasuk = BarangMasuk::create([
             'barang_id' => $request->barang_id,
             'stoktambah' => $request->stoktambah,
         ]);
 
-        Laporan::create([
-            'barang_id' => $request->barang_id,
-            'stokawal' => $request->stoktambah,
-            'stoktambah' => $request->stoktambah,
-            'stokkurang' => 0,
-            'stokakhir' => $request->stoktambah
-        ]);
+        $laporan = Laporan::where('barang_id', $request->barang_id)->orderBy('created_at', 'desc')->first();
+        if ($laporan) {
+            $laporan->update([
+                'stokawal' => $laporan->stokakhir,
+                'stoktambah' => $request->stoktambah,
+                'stokakhir' => $laporan->stokakhir + $request->stoktambah
+            ]);
+        } else {
+            Laporan::create([
+                'barang_id' => $request->barang_id,
+                'stokawal' => 0,
+                'stoktambah' => $request->stoktambah,
+                'stokkurang' => 0,
+                'stokakhir' => $request->stoktambah
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
@@ -58,15 +67,17 @@ class AdminBarangMasukController extends Controller
 
         $barangMasuk = BarangMasuk::findOrFail($id);
 
+        $laporan = Laporan::where('barang_id', $request->barang_id)->orderBy('created_at', 'desc')->firstOrFail();
+        $stokAkhirBaru = $laporan->stokakhir - $barangMasuk->stoktambah + $request->stoktambah;
+
         $barangMasuk->update([
             'barang_id' => $request->barang_id,
             'stoktambah' => $request->stoktambah,
         ]);
 
-        $laporan = Laporan::where('barang_id', $request->barang_id)->firstOrFail();
         $laporan->update([
             'stoktambah' => $request->stoktambah,
-            'stokakhir' => $request->stoktambah,
+            'stokakhir' => $stokAkhirBaru
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');
