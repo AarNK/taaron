@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rekomendasi;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 
 class AdminRekomendasiController extends Controller
@@ -11,9 +12,9 @@ class AdminRekomendasiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rekomendasis = Rekomendasi::all();
+        $rekomendasis = Laporan::orderBy('stokkurang', 'desc')->get();
         return view('admin.rekomendasi.index', compact('rekomendasis'));
     }
 

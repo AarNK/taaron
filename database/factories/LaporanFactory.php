@@ -17,8 +17,8 @@ class LaporanFactory extends Factory
      */
     public function definition(): array
     {
-        $stoktambah = fake()->numberBetween(20, 30);
-        $stokkurang = fake()->numberBetween(1, 10);
+        $stoktambah = fake()->numberBetween(60, 80);
+        $stokkurang = fake()->numberBetween(1, 60);
         return [
             'barang_id' => Barang::factory(),
             'stokawal' => $stoktambah, // Angka stok awal acak
