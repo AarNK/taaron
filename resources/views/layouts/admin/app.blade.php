@@ -33,6 +33,8 @@
         href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     <!-- DataTables Buttons CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- DataTables Responsive CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 </head>
 <body class="hold-transition
         sidebar-mini layout-fixed">
@@ -125,7 +127,8 @@
     <script>
         $(function() {
             $("#example1").DataTable({
-                "responsive": true,
+                "responsive": false,
+                "scrollX": true,
                 "lengthChange": true,
                 "autoWidth": true,
                 "paging": true,
@@ -165,8 +168,23 @@
                 "info": true,
                 "autoWidth": false,
             });
+
+            // Initialize stock table on dashboard
+            $('#stokTable').DataTable({
+                responsive: true,
+                lengthChange: true,
+                lengthMenu: [[10,25,50,100],[10,25,50,100]],
+                paging: true,
+                autoWidth: false,
+                searching: true,
+                ordering: true,
+                info: true
+            });
         });
     </script>
+    <!-- DataTables Responsive JS -->
+    <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     </body>
 
 </html>

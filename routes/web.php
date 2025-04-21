@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminRekomendasiController;
 use App\Http\Controllers\Admin\AdminSatuanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Laporan;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,7 +30,8 @@ Route::get('/rekomendasi', [AdminRekomendasiController::class, 'index'])->name('
 Route::get('/laporan', [AdminLaporanController::class, 'index'])->name('laporan');
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    $laporans = Laporan::with('barang.kategori', 'barang.satuan')->orderBy('created_at', 'desc')->get();
+    return view('admin.dashboard', compact('laporans'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

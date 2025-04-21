@@ -112,30 +112,51 @@
             <a href="laporan" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-light">
-            <div class="inner">
-              <h3>8</h3>
-
-              <p>Stok Rendah</p>
+      </div>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Stok Barang</h3>
             </div>
-            <div class="icon">
-              <i class="ion ion-alert"></i>
+            <div class="card-body">
+              <table id="stokTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Barang</th>
+                    <th>Kategori</th>
+                    <th>Satuan</th>
+                    <th>Stok Akhir</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($laporans as $laporan)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $laporan->barang->name ?? '-' }}</td>
+                    <td>{{ $laporan->barang->kategori->name ?? '-' }}</td>
+                    <td>{{ $laporan->barang->satuan->name ?? '-' }}</td>
+                    <td>{{ $laporan->stokakhir ?? '-' }}</td>
+                    <td>
+                      @if($laporan->stokakhir >= 15)
+                        <span class="badge badge-success">Stok Cukup</span>
+                      @else
+                        <span class="badge badge-danger">Stok Rendah</span>
+                      @endif
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
             </div>
-            <a href="#" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>
       <!-- /.row -->
-      <!-- Main row -->
-      
-          <!-- /.card -->
-        </section>
-        <!-- /.Left col -->
-      </div>
-      <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
