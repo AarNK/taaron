@@ -51,8 +51,10 @@
                   <td>{{ $barangmasuk->barang->satuan->name ?? "-"}}</td>
                   <td>{{ $barangmasuk->stoktambah ?? "-"}}</td>
                   <td>
-                    @include('admin.barangmasuk.edit')
-                    @include('admin.barangmasuk.delete')
+                    <div style="display: flex; gap: 10px;">
+                      @include('admin.barangmasuk.edit')
+                      @include('admin.barangmasuk.delete')
+                    </div>
                   </td>
                 </tr>    
                 @endforeach

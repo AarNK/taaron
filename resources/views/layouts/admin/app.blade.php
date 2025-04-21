@@ -132,24 +132,24 @@
                 "buttons": [
                     {
                         extend: 'excel',
-                        text: '<i class="fas fa-file-excel"></i> Excel',
-                        className: 'btn btn-dark mb-3',
+                        text: '<i class="fas fa-file-excel fa-sm"></i> Excel',
+                        className: 'btn btn-dark mb-3 rounded-circle p-2 mr-2',
                         exportOptions: {
                             columns: [':not(:last-child)']
                         },
                     },
                     {
                         extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"></i> PDF',
-                        className: 'btn btn-dark mb-3',
+                        text: '<i class="fas fa-file-pdf fa-sm"></i> PDF',
+                        className: 'btn btn-dark mb-3 rounded-circle p-2 mr-2',
                         exportOptions: {
                             columns: [':not(:last-child)']
                         },
                     },
                     {
                         extend: 'print',
-                        text: '<i class="fas fa-print"></i> Print',
-                        className: 'btn btn-dark mb-3',
+                        text: '<i class="fas fa-print fa-sm"></i> Print',
+                        className: 'btn btn-dark mb-3 rounded-circle p-2 mr-2',
                         exportOptions: {
                             columns: [':not(:last-child)']
                         },

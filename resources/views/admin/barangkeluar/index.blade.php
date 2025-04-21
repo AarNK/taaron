@@ -51,8 +51,10 @@
                   <td>{{ $barangkeluar->barang->satuan->name ?? "-"}}</td>
                   <td>{{ $barangkeluar->stokkurang ?? "-"}}</td>
                   <td>
+                    <div style="display: flex; gap: 10px;">
                       @include('admin.barangkeluar.edit')
                       @include('admin.barangkeluar.delete')
+                    </div>
                   </td>
                 </tr>    
                 @endforeach
