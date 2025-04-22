@@ -33,9 +33,10 @@
               <thead>
               <tr>
                 <th>No</th>
-                <th>Barang</th>
+                <th>Nama Barang</th>
                 <th>Kategori</th>
                 <th>Satuan</th>
+                <th>Harga</th>
                 <th>More</th>
               </tr>
               </thead>
@@ -46,6 +47,7 @@
                   <td>{{ $barang->name ?? "-"}}</td>
                   <td>{{ $barang->kategori->name ?? "-"}}</td>
                   <td>{{ $barang->satuan->name ?? "-"}}</td>
+                  <td>{{ $barang->harga ?? "-"}}</td>
                   <td>
                     @include('admin.barang.edit')
                     @include('admin.barang.delete')

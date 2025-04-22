@@ -30,12 +30,14 @@ class AdminBarangController extends Controller
             'kategori_id' => 'required|max:100',
             'satuan_id' => 'required|max:100',
             'name' => 'required|max:100',
+            'harga' => 'required|numeric',
         ]);
 
         Barang::create([
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
             'name' => $request->name,
+            'harga' => $request->harga,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
@@ -50,6 +52,7 @@ class AdminBarangController extends Controller
             'kategori_id' => 'required|max:100',
             'satuan_id' => 'required|max:100',
             'name' => 'required|max:100',
+            'harga' => 'required|numeric',
         ]);
 
         $barang = Barang::findOrFail($id);
@@ -58,6 +61,7 @@ class AdminBarangController extends Controller
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
             'name' => $request->name,
+            'harga' => $request->harga,
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');

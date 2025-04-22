@@ -10,9 +10,11 @@ use App\Http\Controllers\Admin\AdminSatuanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Laporan;
+use App\Models\Barang;
 
 Route::get('/', function () {
-    return view('welcome');
+    $barangs = Barang::all();
+    return view('welcome', compact('barangs'));
 });
 
 Route::resource('barang', AdminBarangController::class);
