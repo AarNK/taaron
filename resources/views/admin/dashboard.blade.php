@@ -12,14 +12,12 @@
           <!-- small box -->
           <div class="small-box bg-dark">
             <div class="inner">
-              <h3>50</h3>
-
-              <p>User</p>
+              <p>Profile</p>
             </div>
             <div class="icon">
               <i class="ion ion-person"></i>
             </div>
-            <a href="#" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="profile" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -27,8 +25,6 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
-
               <p>Barang Keluar</p>
             </div>
             <div class="icon">
@@ -42,8 +38,6 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>200</h3>
-
               <p>Barang Masuk</p>
             </div>
             <div class="icon">
@@ -57,8 +51,6 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>10</h3>
-
               <p>Kategori</p>
             </div>
             <div class="icon">
@@ -72,8 +64,6 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>5</h3>
-
               <p>Satuan Barang</p>
             </div>
             <div class="icon">
@@ -87,8 +77,6 @@
           <!-- small box -->
           <div class="small-box bg-primary">
             <div class="inner">
-              <h3>3</h3>
-
               <p>Rekomendasi</p>
             </div>
             <div class="icon">
@@ -102,8 +90,6 @@
           <!-- small box -->
           <div class="small-box bg-secondary">
             <div class="inner">
-              <h3>7</h3>
-
               <p>Laporan</p>
             </div>
             <div class="icon">
