@@ -28,9 +28,9 @@
                         <a href="{{ url('/dashboard') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Log in</a>
-                        @if (Route::has('register'))
+                        {{-- @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Register</a>
-                        @endif
+                        @endif --}}
                     @endauth
                 </div>
             @endif
@@ -51,7 +51,7 @@
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $barang->name }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $barang->harga }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
