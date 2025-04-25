@@ -68,12 +68,13 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">1</td>
-                            <td class="px-4 py-2 whitespace-nowrap">Contoh Jasa</td>
-                            <td class="px-4 py-2 whitespace-nowrap">Rp 200.000</td>
-                        </tr>
-                        <!-- Add more rows as needed -->
+                        @foreach($jasas as $jasa)
+                            <tr>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $jasa->name }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">Rp {{ number_format($jasa->harga, 0, ',', '.') }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
