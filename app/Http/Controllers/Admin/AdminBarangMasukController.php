@@ -7,6 +7,8 @@ use App\Models\Barang;
 use App\Models\BarangMasuk;
 use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\BarangMasukImport;
 
 class AdminBarangMasukController extends Controller
 {
@@ -93,5 +95,19 @@ class AdminBarangMasukController extends Controller
         $barangMasuk->delete();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
+    }
+
+    /**
+     * Import barang masuk from Excel.
+     */
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new BarangMasukImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data berhasil diimpor dari Excel.');
     }
 }

@@ -41,6 +41,8 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard', compact('laporans'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::post('/admin/barangmasuk/import', [AdminBarangMasukController::class, 'importExcel'])->name('admin.barangmasuk.import');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

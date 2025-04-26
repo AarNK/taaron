@@ -11,6 +11,11 @@
           <div class="card-header">
             <div class="text-right">
               @include('admin.barangmasuk.create')
+              <form action="{{ route('admin.barangmasuk.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" required>
+                <button type="submit" class="btn btn-primary">Import Excel</button>
+              </form>
               @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
