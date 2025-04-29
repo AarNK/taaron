@@ -37,22 +37,12 @@ class AdminBarangMasukController extends Controller
             'stoktambah' => $request->stoktambah,
         ]);
 
-        $laporan = Laporan::where('barang_id', $request->barang_id)->orderBy('created_at', 'desc')->first();
-        if ($laporan) {
-            $laporan->update([
-                'stokawal' => $laporan->stokakhir,
-                'stoktambah' => $request->stoktambah,
-                'stokakhir' => $laporan->stokakhir + $request->stoktambah
-            ]);
-        } else {
-            Laporan::create([
-                'barang_id' => $request->barang_id,
-                'stokawal' => 0,
-                'stoktambah' => $request->stoktambah,
-                'stokkurang' => 0,
-                'stokakhir' => $request->stoktambah
-            ]);
-        }
+        $laporan = Laporan::where('barang_id', $request->barang_id)->orderBy('created_at', 'desc')->firstOrFail();
+        $stokAkhirBaru = $laporan->stokakhir + $request->stoktambah;
+        $laporan->update([
+            'stoktambah' => $laporan->stoktambah + $request->stoktambah,
+            'stokakhir' => $stokAkhirBaru
+        ]);
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
