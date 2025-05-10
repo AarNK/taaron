@@ -44,9 +44,10 @@ Route::get('/dashboard', function () {
 Route::post('/admin/barangmasuk/import', [AdminBarangMasukController::class, 'importExcel'])->name('admin.barangmasuk.import');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 });
 
 require __DIR__.'/auth.php';

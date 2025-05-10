@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -24,17 +26,30 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        try {
+            $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            ]);
+
+            $user->name = $validated['name'];
+            $user->email = $validated['email'];
+
+            if ($request->filled('password')) {
+                $user->password = Hash::make($validated['password']);
+            }
+
+            $user->save();
+
+            return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('profile.edit')->with('error', 'Failed to update profile. Please try again.');
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**
@@ -56,5 +71,22 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Update the user's password.
+     */
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $request->user()->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        return Redirect::route('profile.edit')->with('status', 'password-updated');
     }
 }
