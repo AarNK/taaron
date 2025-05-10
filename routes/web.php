@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminKategoriController;
 use App\Http\Controllers\Admin\AdminLaporanController;
 use App\Http\Controllers\Admin\AdminRekomendasiController;
 use App\Http\Controllers\Admin\AdminSatuanController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminJasaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,8 @@ Route::resource('barangkeluar', AdminBarangKeluarController::class);
 Route::resource('kategori', AdminKategoriController::class);
 
 Route::resource('satuan', AdminSatuanController::class);
+
+Route::resource('user', AdminUserController::class);
 
 Route::resource('jasa', AdminJasaController::class);
 
