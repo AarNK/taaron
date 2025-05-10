@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('satuan_id');
-            $table->foreignId('kategori_id');
+            $table->foreignId('satuan_id')->nullable();
+            $table->foreignId('kategori_id')->nullable();
             $table->decimal('harga', 15, 2);
             $table->timestamps();
         });
