@@ -21,23 +21,6 @@ Route::get('/', function () {
     return view('welcome', compact('barangs', 'jasas'));
 });
 
-Route::resource('barang', AdminBarangController::class);
-
-Route::resource('barangmasuk', AdminBarangMasukController::class);
-
-Route::resource('barangkeluar', AdminBarangKeluarController::class);
-
-Route::resource('kategori', AdminKategoriController::class);
-
-Route::resource('satuan', AdminSatuanController::class);
-
-Route::resource('user', AdminUserController::class);
-
-Route::resource('jasa', AdminJasaController::class);
-
-Route::get('/rekomendasi', [AdminRekomendasiController::class, 'index'])->name('rekomendasi');
-
-Route::get('/laporan', [AdminLaporanController::class, 'index'])->name('laporan');
 
 Route::get('/dashboard', function () {
     $laporans = Laporan::with('barang.kategori', 'barang.satuan')->orderBy('created_at', 'desc')->get();
@@ -47,6 +30,16 @@ Route::get('/dashboard', function () {
 Route::post('/admin/barangmasuk/import', [AdminBarangMasukController::class, 'importExcel'])->name('admin.barangmasuk.import');
 
 Route::middleware('auth')->group(function () {
+    Route::resource('barang', AdminBarangController::class);
+    Route::resource('barangmasuk', AdminBarangMasukController::class);
+    Route::resource('barangkeluar', AdminBarangKeluarController::class);
+    Route::resource('kategori', AdminKategoriController::class);
+    Route::resource('satuan', AdminSatuanController::class);
+    Route::resource('user', AdminUserController::class);
+    Route::resource('jasa', AdminJasaController::class);
+    Route::get('/rekomendasi', [AdminRekomendasiController::class, 'index'])->name('rekomendasi');
+    Route::get('/laporan', [AdminLaporanController::class, 'index'])->name('laporan');
+    
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

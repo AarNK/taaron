@@ -13,6 +13,18 @@ class KategoriSeeder extends Seeder
      */
     public function run(): void
     {
-        Kategori::factory(10)->create();
+        // Kategori::factory(10)->create();
+        Kategori::insert([
+            [
+                'name' => 'Kategori 1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Kategori 2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }

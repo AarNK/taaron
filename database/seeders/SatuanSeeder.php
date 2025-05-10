@@ -13,6 +13,18 @@ class SatuanSeeder extends Seeder
      */
     public function run(): void
     {
-        Satuan::factory(10)->create();
+        // Satuan::factory(10)->create();
+        Satuan::insert([
+            [
+                'name' => 'Satuan 1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Satuan 2',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]); 
     }
 }

@@ -99,6 +99,16 @@
               </p>
             </a>
           </li>
+          @if(Auth::user()->role === 'admin')
+          <li class="nav-item">
+            <a href="{{ route('user.index') }}" class="nav-link">
+              <i class="fas fa-users nav-icon"></i>
+              <p>
+                Manajemen User
+              </p>
+            </a>
+          </li>
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

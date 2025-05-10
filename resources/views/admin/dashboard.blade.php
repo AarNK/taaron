@@ -17,7 +17,7 @@
             <div class="icon">
               <i class="ion ion-person"></i>
             </div>
-            <a href="profile" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="profile/edit" class="small-box-footer">Info lebih lanjut <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
