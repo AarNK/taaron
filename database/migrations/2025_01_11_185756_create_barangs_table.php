@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('satuan_id');
             $table->foreignId('kategori_id');
+            $table->decimal('harga', 15, 2);
             $table->timestamps();
         });
     }

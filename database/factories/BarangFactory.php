@@ -23,6 +23,7 @@ class BarangFactory extends Factory
             'name' => fake()->name(),
             'satuan_id' => Satuan::factory(),
             'kategori_id' => Kategori::factory(),
+            'harga' => fake()->randomFloat(2, 1, 1000),
         ];
     }
 }
