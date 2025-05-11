@@ -24,11 +24,16 @@ class AdminUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'role' => 'required|string',
+            'password' => 'required|string|min:6',
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
         ]);
 
         return redirect()->back()->with('success', 'User berhasil ditambahkan.');
