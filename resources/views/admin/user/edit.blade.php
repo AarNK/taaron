@@ -8,7 +8,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editSatuanModalLabel">Edit Satuan</h5>
+                <h5 class="modal-title" id="editSatuanModalLabel">Edit User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,7 +18,7 @@
                 @method('PUT')
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Nama Satuan</label>
+                        <label for="name">Nama User</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}" required>
                     </div>
                     <div class="form-group">
