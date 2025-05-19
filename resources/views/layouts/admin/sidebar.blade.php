@@ -2,7 +2,7 @@
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="Berkahmotor.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8; margin-top: 5px">
+      <img src="/assets/dist/img/Berkahmotor.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8; margin-top: 0px">
       <span class="brand-text font-weight-light">Sitory</span>
     </a>
 
