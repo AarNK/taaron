@@ -8,10 +8,9 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-              <div class="form-group mb-0">
-                <label for="monthFilter" class="mb-2">Filter by Month:</label>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="form-group">
+                <label for="monthFilter">Filter by Month:</label>
                 <select id="monthFilter" class="form-control" onchange="filterByMonth()">
                     <option value="">Select Month</option>
                     <option value="01">January</option>
@@ -27,7 +26,6 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-              </div>
             </div>
           </div>
           <!-- /.card-header -->
@@ -36,29 +34,29 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th class="text-center" style="width: 5%">No</th>
-                  <th class="text-center" style="width: 15%">Tanggal</th>
-                  <th class="text-center" style="width: 10%">Kategori</th>
-                  <th class="text-center" style="width: 15%">Nama Barang</th>
-                  <th class="text-center" style="width: 10%">Satuan</th>
-                  <th class="text-center" style="width: 10%">Stok Awal</th>
-                  <th class="text-center" style="width: 10%">Tambah</th>
-                  <th class="text-center" style="width: 10%">Kurang</th>
-                  <th class="text-center" style="width: 15%">Stok Akhir</th>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Kategori</th>
+                  <th>Nama Barang</th>
+                  <th>Satuan</th>
+                  <th>Stok Awal</th>
+                  <th>Tambah</th>
+                  <th>Kurang</th>
+                  <th>Stok Akhir</th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach ($laporans as $laporan)
                   <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">{{ $laporan->created_at ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->barang->kategori->name ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->barang->name ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->barang->satuan->name ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->stokawal ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->stoktambah ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->stokkurang ?? "-"}}</td>
-                    <td class="text-center">{{ $laporan->stokakhir ?? "-"}}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $laporan->created_at ?? "-"}}</td>
+                    <td>{{ $laporan->barang->kategori->name ?? "-"}}</td>
+                    <td>{{ $laporan->barang->name ?? "-"}}</td>
+                    <td>{{ $laporan->barang->satuan->name ?? "-"}}</td>
+                    <td>{{ $laporan->stokawal ?? "-"}}</td>
+                    <td>{{ $laporan->stoktambah ?? "-"}}</td>
+                    <td>{{ $laporan->stokkurang ?? "-"}}</td>
+                    <td>{{ $laporan->stokakhir ?? "-"}}</td>
                   </tr>    
                   @endforeach
                 </tbody>
