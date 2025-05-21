@@ -29,35 +29,39 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example2" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-                <th>More</th>
-              </tr>
-              </thead>
-              <tbody>
-                @foreach ($users as $user)
+            <div class="table-responsive">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $user->name ?? "-"}}</td>
-                  <td>{{ $user->email ?? "-"}}</td>
-                  <td>{{ $user->role ?? "-"}}</td>
-                  <td>{{ $user->created_at ?? "-"}}</td>
-                  <td>{{ $user->updated_at ?? "-"}}</td>
-                  <td>
-                    @include('admin.user.edit')
-                    @include('admin.user.delete')
-                  </td>
-                </tr>    
-                @endforeach
-              </tbody>
-            </table>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Created At</th>
+                  <th>Updated At</th>
+                  <th>More</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($users as $user)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $user->name ?? "-"}}</td>
+                    <td>{{ $user->email ?? "-"}}</td>
+                    <td>{{ $user->role ?? "-"}}</td>
+                    <td>{{ $user->created_at ?? "-"}}</td>
+                    <td>{{ $user->updated_at ?? "-"}}</td>
+                    <td>
+                      <div class="d-flex gap-2">
+                        @include('admin.user.edit')
+                        @include('admin.user.delete')
+                      </div>
+                    </td>
+                  </tr>    
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           <!-- /.card-body -->
         </div>

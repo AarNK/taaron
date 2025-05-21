@@ -11,10 +11,14 @@
           <div class="card-header">
             <div class="text-right">
               @include('admin.barangmasuk.create')
-              <form action="{{ route('admin.barangmasuk.import') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('admin.barangmasuk.import') }}" method="POST" enctype="multipart/form-data" class="d-inline-block">
                 @csrf
-                <input type="file" name="file" required>
-                <button type="submit" class="btn btn-primary">Import Excel</button>
+                <div class="input-group">
+                  <input type="file" name="file" required class="form-control">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Import Excel</button>
+                  </div>
+                </div>
               </form>
               @if ($errors->any())
                 <div class="alert alert-danger">
@@ -34,37 +38,39 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example2" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Kategori</th>
-                <th>Nama Barang</th>
-                <th>Satuan</th>
-                <th>Tambah</th>
-                <th>More</th>
-              </tr>
-              </thead>
-              <tbody>
-                @foreach ($barang_masuks as $barangmasuk)
+            <div class="table-responsive">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $barangmasuk->created_at ?? "-"}}</td>
-                  <td>{{ $barangmasuk->barang->kategori->name ?? "-"}}</td>
-                  <td>{{ $barangmasuk->barang->name ?? "-"}}</td>
-                  <td>{{ $barangmasuk->barang->satuan->name ?? "-"}}</td>
-                  <td>{{ $barangmasuk->stoktambah ?? "-"}}</td>
-                  <td>
-                    <div style="display: flex; gap: 10px;">
-                      @include('admin.barangmasuk.edit')
-                      @include('admin.barangmasuk.delete')
-                    </div>
-                  </td>
-                </tr>    
-                @endforeach
-              </tbody>
-            </table>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Kategori</th>
+                  <th>Nama Barang</th>
+                  <th>Satuan</th>
+                  <th>Tambah</th>
+                  <th>More</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($barang_masuks as $barangmasuk)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $barangmasuk->created_at ?? "-"}}</td>
+                    <td>{{ $barangmasuk->barang->kategori->name ?? "-"}}</td>
+                    <td>{{ $barangmasuk->barang->name ?? "-"}}</td>
+                    <td>{{ $barangmasuk->barang->satuan->name ?? "-"}}</td>
+                    <td>{{ $barangmasuk->stoktambah ?? "-"}}</td>
+                    <td>
+                      <div class="d-flex gap-2">
+                        @include('admin.barangmasuk.edit')
+                        @include('admin.barangmasuk.delete')
+                      </div>
+                    </td>
+                  </tr>    
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           <!-- /.card-body -->
         </div>

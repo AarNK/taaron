@@ -29,37 +29,39 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example2" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Kategori</th>
-                <th>Nama Barang</th>
-                <th>Satuan</th>
-                <th>Barang Keluar</th>
-                <th>More</th>
-              </tr>
-              </thead>
-              <tbody>
-                @foreach ($barang_keluars as $barangkeluar)
+            <div class="table-responsive">
+              <table id="example2" class="table table-bordered table-striped">
+                <thead>
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $barangkeluar->created_at ?? "-" }}</td>
-                  <td>{{ $barangkeluar->barang->kategori->name ?? "-"}}</td>
-                  <td>{{ $barangkeluar->barang->name ?? "-"}}</td>
-                  <td>{{ $barangkeluar->barang->satuan->name ?? "-"}}</td>
-                  <td>{{ $barangkeluar->stokkurang ?? "-"}}</td>
-                  <td>
-                    <div style="display: flex; gap: 10px;">
-                      @include('admin.barangkeluar.edit')
-                      @include('admin.barangkeluar.delete')
-                    </div>
-                  </td>
-                </tr>    
-                @endforeach
-              </tbody>
-            </table>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Kategori</th>
+                  <th>Nama Barang</th>
+                  <th>Satuan</th>
+                  <th>Barang Keluar</th>
+                  <th>More</th>
+                </tr>
+                </thead>
+                <tbody>
+                  @foreach ($barang_keluars as $barangkeluar)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $barangkeluar->created_at ?? "-" }}</td>
+                    <td>{{ $barangkeluar->barang->kategori->name ?? "-"}}</td>
+                    <td>{{ $barangkeluar->barang->name ?? "-"}}</td>
+                    <td>{{ $barangkeluar->barang->satuan->name ?? "-"}}</td>
+                    <td>{{ $barangkeluar->stokkurang ?? "-"}}</td>
+                    <td>
+                      <div class="d-flex gap-2">
+                        @include('admin.barangkeluar.edit')
+                        @include('admin.barangkeluar.delete')
+                      </div>
+                    </td>
+                  </tr>    
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           <!-- /.card-body -->
         </div>
