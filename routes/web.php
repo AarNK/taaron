@@ -14,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Laporan;
 use App\Models\Barang;
 use App\Models\Jasa;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    $barangs = Barang::all();
-    $jasas = Jasa::all();
-    return view('welcome', compact('barangs', 'jasas'));
-});
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::get('/dashboard', function () {
     $laporans = Laporan::with('barang.kategori', 'barang.satuan')->orderBy('created_at', 'desc')->get();

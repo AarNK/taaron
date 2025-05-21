@@ -20,7 +20,7 @@
         @endif
     </head>
     <body class="font-sans antialiased bg-gray-100">
-        <div class="relative min-h-screen flex flex-col items-center justify-center px-6">
+        <div class="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
             {{-- Top-right login nav --}}
             @if (Route::has('login'))
                 <div class="absolute top-4 right-4 space-x-4">
@@ -28,55 +28,90 @@
                         <a href="{{ url('/dashboard') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Log in</a>
-                        {{-- @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Register</a>
-                        @endif --}}
                     @endauth
                 </div>
             @endif
-            <h1 class="text-5xl font-bold mb-4 text-black">Selamat Datang di Berkah Motor</h1>
-            <p class="text-lg mb-8 text-gray-700">Bengkel Terpercaya No.1 Masyarakat Karang Anyar</p>
-            {{-- Table section --}}
-            <div class="mt-8 w-full max-w-4xl px-6 overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Barang</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Barang</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($barangs as $barang)
-                            <tr>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $barang->name }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+
+            {{-- Header Section --}}
+            <div class="text-center mb-8">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-black">Selamat Datang di Berkah Motor</h1>
+                <p class="text-base sm:text-lg text-gray-700">Bengkel Terpercaya No.1 Masyarakat Karang Anyar</p>
             </div>
-            {{-- Service price table section (harga jasa) --}}
-            <div class="mt-8 w-full max-w-4xl px-6 overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Jasa</th>
-                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Jasa</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($jasas as $jasa)
+
+            {{-- Barang table section --}}
+            <div class="w-full max-w-4xl mb-8">
+                <div class="mb-4">
+                    <form action="{{ route('welcome') }}" method="GET" class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" name="search_barang" value="{{ $searchBarang }}" placeholder="Cari barang..." class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <div class="flex gap-2">
+                            <button type="submit" class="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Cari</button>
+                            @if($searchBarang)
+                                <a href="{{ route('welcome', ['search_jasa' => $searchJasa]) }}" class="w-full sm:w-auto bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Reset</a>
+                            @endif
+                        </div>
+                    </form>
+                </div>
+                <div class="overflow-x-auto bg-white rounded-lg shadow">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-50">
                             <tr>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $jasa->name }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">Rp {{ number_format($jasa->harga, 0, ',', '.') }}</td>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Barang</th>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Barang</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($barangs as $barang)
+                                <tr>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $loop->iteration }}</td>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $barang->name }}</td>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4">
+                    {{ $barangs->appends(['search_jasa' => $searchJasa])->links() }}
+                </div>
+            </div>
+
+            {{-- Jasa table section --}}
+            <div class="w-full max-w-4xl">
+                <div class="mb-4">
+                    <form action="{{ route('welcome') }}" method="GET" class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" name="search_jasa" value="{{ $searchJasa }}" placeholder="Cari jasa..." class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <div class="flex gap-2">
+                            <button type="submit" class="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Cari</button>
+                            @if($searchJasa)
+                                <a href="{{ route('welcome', ['search_barang' => $searchBarang]) }}" class="w-full sm:w-auto bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Reset</a>
+                            @endif
+                        </div>
+                    </form>
+                </div>
+                <div class="overflow-x-auto bg-white rounded-lg shadow">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Jasa</th>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Jasa</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($jasas as $jasa)
+                                <tr>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $loop->iteration }}</td>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $jasa->name }}</td>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">Rp {{ number_format($jasa->harga, 0, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4">
+                    {{ $jasas->appends(['search_barang' => $searchBarang])->links() }}
+                </div>
             </div>
         </div>
     </body>
