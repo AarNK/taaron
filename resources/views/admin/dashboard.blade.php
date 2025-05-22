@@ -108,36 +108,38 @@
               <h3 class="card-title">Stok Barang</h3>
             </div>
             <div class="card-body">
-              <table id="stokTable" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama Barang</th>
-                    <th>Kategori</th>
-                    <th>Satuan</th>
-                    <th>Stok Akhir</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach($laporans as $laporan)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $laporan->barang->name ?? '-' }}</td>
-                    <td>{{ $laporan->barang->kategori->name ?? '-' }}</td>
-                    <td>{{ $laporan->barang->satuan->name ?? '-' }}</td>
-                    <td>{{ $laporan->stokakhir ?? '-' }}</td>
-                    <td>
-                      @if($laporan->stokakhir >= 15)
-                        <span class="badge badge-success">Stok Cukup</span>
-                      @else
-                        <span class="badge badge-danger">Stok Rendah</span>
-                      @endif
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Nama Barang</th>
+                      <th>Kategori</th>
+                      <th>Satuan</th>
+                      <th>Stok Akhir</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($laporans as $laporan)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $laporan->barang->name ?? '-' }}</td>
+                      <td>{{ $laporan->barang->kategori->name ?? '-' }}</td>
+                      <td>{{ $laporan->barang->satuan->name ?? '-' }}</td>
+                      <td>{{ $laporan->stokakhir ?? '-' }}</td>
+                      <td>
+                        @if($laporan->stokakhir >= 15)
+                          <span class="badge badge-success">Stok Cukup</span>
+                        @else
+                          <span class="badge badge-danger">Stok Rendah</span>
+                        @endif
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
