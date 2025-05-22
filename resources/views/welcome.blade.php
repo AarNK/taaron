@@ -56,6 +56,7 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                                <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
                                 <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Barang</th>
                                 <th class="px-3 sm:px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Barang</th>
                             </tr>
@@ -64,6 +65,7 @@
                             @foreach($barangs as $barang)
                                 <tr>
                                     <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $loop->iteration }}</td>
+                                    <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $barang->kategori->name }}</td>
                                     <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">{{ $barang->name }}</td>
                                     <td class="px-3 sm:px-4 py-2 whitespace-nowrap text-sm">Rp {{ number_format($barang->harga, 0, ',', '.') }}</td>
                                 </tr>
@@ -72,7 +74,7 @@
                     </table>
                 </div>
                 <div class="mt-4">
-                    {{ $barangs->appends(['search_jasa' => $searchJasa])->links() }}
+                    {{ $barangs->appends(['search_jasa' => $searchJasa, 'jasa_page' => request()->input('jasa_page')])->links() }}
                 </div>
             </div>
 
@@ -84,7 +86,7 @@
                         <div class="flex gap-2">
                             <button type="submit" class="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Cari</button>
                             @if($searchJasa)
-                                <a href="{{ route('welcome', ['search_barang' => $searchBarang]) }}" class="w-full sm:w-auto bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Reset</a>
+                                <a href="{{ route('welcome', ['search_barang' => $searchBarang, 'barang_page' => request()->input('barang_page')]) }}" class="w-full sm:w-auto bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Reset</a>
                             @endif
                         </div>
                     </form>
@@ -110,7 +112,7 @@
                     </table>
                 </div>
                 <div class="mt-4">
-                    {{ $jasas->appends(['search_barang' => $searchBarang])->links() }}
+                    {{ $jasas->appends(['search_barang' => $searchBarang, 'barang_page' => request()->input('barang_page')])->links() }}
                 </div>
             </div>
         </div>
