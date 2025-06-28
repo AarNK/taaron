@@ -14,32 +14,23 @@ class BarangKeluarImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
-        // Skip if required fields are empty
-        if (empty($row['nama_barang']) || empty($row['kategori']) || empty($row['satuan']) || empty($row['stok_kurang'])) {
+        // Skip jika field penting kosong
+        if (empty($row['nama_barang']) || empty($row['kategori']) || empty($row['satuan']) || empty($row['stok_keluar'])) {
             return null;
         }
 
         $name = $row['nama_barang'] ?? null;
         $kategoriName = $row['kategori'] ?? null;
         $satuanName = $row['satuan'] ?? null;
-        $stokKurang = $row['stok_kurang'] ?? null;
+        $stokKeluar = $row['stok_keluar'] ?? null;
 
-        $kategori = Kategori::where('name', $kategoriName)->first();
+        // Cari atau buat kategori
+        $kategori = Kategori::firstOrCreate(['name' => $kategoriName]);
 
-        if (!$kategori) {
-            $kategori = Kategori::create([
-                'name' => $kategoriName,
-            ]);
-        }
+        // Cari atau buat satuan
+        $satuan = Satuan::firstOrCreate(['name' => $satuanName]);
 
-        $satuan = Satuan::where('name', $satuanName)->first();
-
-        if (!$satuan) {
-            $satuan = Satuan::create([
-                'name' => $satuanName,
-            ]);
-        }
-
+        // Cari atau buat barang
         $barang = Barang::where('name', $name)->first();
 
         if (!$barang) {
@@ -51,40 +42,33 @@ class BarangKeluarImport implements ToModel, WithHeadingRow
             ]);
         }
 
-        // Check if Laporan exists for this barang
+        // Buat data BarangKeluar
+        $barangKeluar = new BarangKeluar([
+            'barang_id' => $barang->id,
+            'stokkurang' => $stokKeluar,
+        ]);
+
+        // Ambil laporan terbaru
         $laporan = Laporan::where('barang_id', $barang->id)->orderBy('created_at', 'desc')->first();
-        
-        // If no laporan exists, create one with initial stock of 0
+
         if (!$laporan) {
+            // Kalau belum ada laporan sama sekali, buat laporan awal stok keluar
             $laporan = Laporan::create([
                 'barang_id' => $barang->id,
                 'stokawal' => 0,
                 'stoktambah' => 0,
-                'stokkurang' => 0,
-                'stokakhir' => 0,
+                'stokkurang' => $stokKeluar,
+                'stokakhir' => -$stokKeluar, // Karena stok keluar duluan
+            ]);
+        } else {
+            // Update laporan: tambah stok keluar dan kurangi stok akhir
+            $stokAkhirBaru = $laporan->stokakhir - $stokKeluar;
+
+            $laporan->update([
+                'stokkurang' => $laporan->stokkurang + $stokKeluar,
+                'stokakhir' => $stokAkhirBaru
             ]);
         }
-
-        // Check if there's enough stock
-        if ($laporan->stokakhir < $stokKurang) {
-            // Skip this row if not enough stock
-            return null;
-        }
-
-        $barangKeluar = new BarangKeluar([
-            'barang_id' => $barang->id,
-            'stokkurang' => $stokKurang,
-        ]);
-
-        // Save the BarangKeluar record
-        $barangKeluar->save();
-
-        // Update Laporan record
-        $stokAkhirBaru = $laporan->stokakhir - $stokKurang;
-        $laporan->update([
-            'stokkurang' => $laporan->stokkurang + $stokKurang,
-            'stokakhir' => $stokAkhirBaru
-        ]);
 
         return $barangKeluar;
     }
