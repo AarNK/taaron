@@ -98,6 +98,6 @@ class AdminBarangMasukController extends Controller
 
         Excel::import(new BarangMasukImport, $request->file('file'));
 
-        return redirect()->back()->with('success', 'Data berhasil diimpor dari Excel.');
+        return redirect()->back();
     }
 }
