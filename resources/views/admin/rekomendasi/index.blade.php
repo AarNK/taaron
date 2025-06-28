@@ -35,9 +35,9 @@
                                             <td>{{ $rekomendasi->stokakhir ?? '-' }}</td>
                                             <td>{{ $rekomendasi->stokkurang ?? '-' }}</td>
                                             <td>
-                                                @if ($rekomendasi->stokkurang >= 50)
+                                                @if ($rekomendasi->stokkurang >= 20)
                                                     <span class="badge badge-success">sering dibeli</span>
-                                                @elseif ($rekomendasi->stokkurang >= 15)
+                                                @elseif ($rekomendasi->stokkurang >= 10)
                                                     <span class="badge badge-secondary">netral</span>
                                                 @else
                                                     <span class="badge badge-danger">jarang dibeli</span>
