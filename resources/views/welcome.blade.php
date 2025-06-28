@@ -948,7 +948,7 @@
                         <button type="submit"
                             class="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Cari</button>
                         @if ($searchBarang)
-                            <a href="{{ route('welcome', ['search_jasa' => $searchJasa]) }}"
+                            <a href="{{ route('welcome', ['search_jasa' => $searchJasa, 'jasa_page' => request()->input('jasa_page')]) }}"
                                 class="w-full sm:w-auto bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">Reset</a>
                         @endif
                     </div>
@@ -987,7 +987,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{ $barangs->appends(['search_jasa' => $searchJasa, 'jasa_page' => request()->input('jasa_page')])->links() }}
+                {{ $barangs->appends(['search_barang' => $searchBarang, 'search_jasa' => $searchJasa, 'jasa_page' => request()->input('jasa_page')])->links() }}
             </div>
         </div>
 
@@ -1035,7 +1035,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{ $jasas->appends(['search_barang' => $searchBarang, 'barang_page' => request()->input('barang_page')])->links() }}
+                {{ $jasas->appends(['search_barang' => $searchBarang, 'search_jasa' => $searchJasa, 'barang_page' => request()->input('barang_page')])->links() }}
             </div>
         </div>
     </div>
