@@ -97,11 +97,8 @@ class AdminBarangKeluarController extends Controller
             'file' => 'required|mimes:xlsx,xls',
         ]);
 
-        try {
-            Excel::import(new BarangKeluarImport, $request->file('file'));
-            return redirect()->back()->with('success', 'Data berhasil diimpor.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal mengimpor data: ' . $e->getMessage());
-        }
+        Excel::import(new BarangKeluarImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data berhasil diimpor dari Excel.');
     }
 }
