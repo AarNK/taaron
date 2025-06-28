@@ -11,6 +11,7 @@
           <div class="card-header">
             <div class="text-right">
               @include('admin.barangkeluar.create')
+              @include('admin.barangkeluar.import')
               @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

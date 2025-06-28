@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Jasa;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\JasaImport;
+
 
 class AdminJasaController extends Controller
 {
@@ -65,5 +68,13 @@ class AdminJasaController extends Controller
         $jasa->delete();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
+    }
+
+    /**
+     * Import jasa from Excel.
+     */
+    public function importExcel(Request $request)
+    {
+        Excel::import(new JasaImport, $request->file('file'));
     }
 } 

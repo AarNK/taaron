@@ -7,6 +7,8 @@ use App\Models\Barang;
 use App\Models\BarangKeluar;
 use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\BarangKeluarImport;
 
 class AdminBarangKeluarController extends Controller
 {
@@ -84,5 +86,22 @@ class AdminBarangKeluarController extends Controller
         $barangKeluar->delete();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
+    }
+
+    /**
+     * Import barang keluar from Excel.
+     */
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new BarangKeluarImport, $request->file('file'));
+            return redirect()->back()->with('success', 'Data berhasil diimpor.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengimpor data: ' . $e->getMessage());
+        }
     }
 }

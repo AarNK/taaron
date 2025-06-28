@@ -35,6 +35,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/admin/barangmasuk/import', [AdminBarangMasukController::class, 'importExcel'])->name('admin.barangmasuk.import');
+Route::post('/admin/barangkeluar/import', [AdminBarangKeluarController::class, 'importExcel'])->name('admin.barangkeluar.import');
+Route::post('/admin/jasa/import', [AdminJasaController::class, 'importExcel'])->name('admin.jasa.import');
 
 Route::middleware('auth')->group(function () {
     Route::resource('barang', AdminBarangController::class);
