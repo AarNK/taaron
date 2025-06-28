@@ -16,12 +16,12 @@ class JasaImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         // Skip jika nama atau harga kosong
-        if (empty($row['name']) || empty($row['harga'])) {
+        if (empty($row['nama']) || empty($row['harga'])) {
             return null;
         }
 
         return new Jasa([
-            'name' => $row['name'],
+            'name' => $row['nama'],
             'harga' => $row['harga'],
         ]);
     }
