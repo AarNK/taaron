@@ -78,7 +78,9 @@ class AdminJasaController extends Controller
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
         ]);
-        
+
         Excel::import(new JasaImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data berhasil diimpor dari Excel.');
     }
 } 
