@@ -75,6 +75,10 @@ class AdminJasaController extends Controller
      */
     public function importExcel(Request $request)
     {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+        
         Excel::import(new JasaImport, $request->file('file'));
     }
 } 
